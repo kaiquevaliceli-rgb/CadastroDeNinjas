@@ -1,10 +1,6 @@
-package com.example.CadastroDeNinjas;
+package com.example.CadastroDeNinjas.Ninjas;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -14,9 +10,18 @@ public class NinjaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
+
     private String email;
+
     private  int idade;
+
+    //@ManyToOne tem uma única missão.
+    @ManyToOne
+    //@JoinColumn usado para juntar as colunas, neste caso as duas que temos. Juntar a coluna de missoes com a coluna de ninjas. Criando uma nova coluna no banco de dados, que será nomeada abaixo como "missoes_id"
+    @JoinColumn(name= "Missoes_id") //Então o "missoes_id" é uma Foreing Key ou Chave estrangeira (ou seja, uma outra coluna, neste caso um terceiro endereço mapeado que representa a junção de duas ou mais tabelas)
+    private list <MissoesModel> missoes;
 
     public NinjaModel() {
     }
